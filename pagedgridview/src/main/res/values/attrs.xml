@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PagedGridView">
+        <attr name="pageIndicatorUnselected" format="color" />
+        <attr name="pageIndicatorSelected" format="color" />
+    </declare-styleable>
+</resources>
