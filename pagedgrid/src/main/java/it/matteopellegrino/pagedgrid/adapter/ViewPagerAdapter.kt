@@ -1,6 +1,5 @@
 package it.matteopellegrino.pagedgrid.adapter
 
-import android.content.res.Configuration
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup

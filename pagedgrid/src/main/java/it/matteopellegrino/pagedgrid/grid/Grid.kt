@@ -1,7 +1,6 @@
 package it.matteopellegrino.pagedgrid.grid
 
 import android.view.View
-import it.matteopellegrino.pagedgrid.element.ElementFactory
 
 /**
  * TODO: Add class description
