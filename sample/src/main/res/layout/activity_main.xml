@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <it.matteopellegrino.pgv.PagedGridView
+    <it.matteopellegrino.pagedgrid.PagedGridView
         android:id="@+id/pagedGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:pageIndicatorSelected="@color/lightGreen">
 
-    </it.matteopellegrino.pgv.PagedGridView>
+    </it.matteopellegrino.pagedgrid.PagedGridView>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,1 +1,1 @@
-include ':sample', ':pagedgridview'
+include ':sample', ':pagedgrid'
