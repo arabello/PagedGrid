@@ -19,8 +19,8 @@ class ConcreteElementFactory(val context: Context) : ElementFactory {
     override fun createIconButton(title: String, img: Bitmap): View {
         val v = layoutInflater.inflate(R.layout.element_icon, null)
 
-        v.findViewById<TextView>(R.id.element_icon_title).text = title
-        v.findViewById<ImageView>(R.id.element_icon_image).setImageBitmap(img)
+        v.findViewById<TextView>(R.id.elementIconTitle).text = title
+        v.findViewById<ImageView>(R.id.elementIconImage).setImageBitmap(img)
 
         return v
     }
@@ -28,8 +28,8 @@ class ConcreteElementFactory(val context: Context) : ElementFactory {
     override fun createIconButton(title: String, @DrawableRes res: Int): View {
         val v = layoutInflater.inflate(R.layout.element_icon, null)
 
-        v.findViewById<TextView>(R.id.element_icon_title).text = title
-        v.findViewById<ImageView>(R.id.element_icon_image).setImageResource(res)
+        v.findViewById<TextView>(R.id.elementIconTitle).text = title
+        v.findViewById<ImageView>(R.id.elementIconImage).setImageResource(res)
 
         return v
     }

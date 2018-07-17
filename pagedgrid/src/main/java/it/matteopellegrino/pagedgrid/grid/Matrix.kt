@@ -13,7 +13,7 @@ interface Matrix<E> : Iterable<E> {
     operator fun get(columnIndex: Int, rowIndex: Int): E
 
     @Throws(IndexOutOfBoundsException::class)
-    fun set(columnIndex: Int, rowIndex: Int, element: E)
+    operator fun set(columnIndex: Int, rowIndex: Int, element: E)
 
     fun contains(element: E): Boolean
 }
