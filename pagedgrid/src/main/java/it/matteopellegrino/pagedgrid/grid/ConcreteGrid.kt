@@ -32,9 +32,12 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
     override fun clear() {
         m = Array(columns) { Array(rows) { Space(context) as View } }
     }
+
     override fun clear(columnIndex: Int, rowIndex: Int) {
         m[columnIndex][rowIndex] = Space(context) as View
     }
+
+    private fun indexToCord(index: Int): Pair<Int, Int> = Pair(index % columns, index / columns)
 
     override fun iterator(): Iterator<View> {
         return object : Iterator<View>{
@@ -44,7 +47,8 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
             override fun hasNext(): Boolean = cursor < end
 
             override fun next(): View {
-                val v = m[cursor / columns][cursor % rows]
+                val cord = indexToCord(cursor)
+                val v = m[cord.first][cord.second]
                 cursor++
                 return v
             }
@@ -53,5 +57,8 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
     }
 
     override fun forEachIndexed(action: (x: Int, y: Int, cell: View) -> Unit) =
-            forEachIndexed { index, view -> action(index / columns, index % rows, view) }
+            forEachIndexed { index, view ->
+                val cord = indexToCord(index)
+                action(cord.first, cord.second, view)
+            }
 }

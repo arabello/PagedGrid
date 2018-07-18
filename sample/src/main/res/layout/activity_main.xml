@@ -9,8 +9,7 @@
     <it.matteopellegrino.pagedgrid.PagedGridView
         android:id="@+id/pagedGridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:pageIndicatorSelected="@color/lightGreen">
+        android:layout_height="match_parent">
 
     </it.matteopellegrino.pagedgrid.PagedGridView>
 
