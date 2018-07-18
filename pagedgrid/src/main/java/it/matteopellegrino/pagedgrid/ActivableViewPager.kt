@@ -19,7 +19,6 @@ internal class ActivableViewPager(context: Context, attrs: AttributeSet?) : View
         return if (enable) {
             super.onTouchEvent(event)
         } else false
-        this.isEnabled
     }
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
