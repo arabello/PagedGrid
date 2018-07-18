@@ -10,4 +10,5 @@ import android.view.View
 interface Grid : Matrix<View> {
     fun clear(columnIndex: Int, rowIndex: Int)
     fun clear()
+    fun forEachIndexed(action: (x: Int, y: Int, cell: View) -> Unit): Unit
 }

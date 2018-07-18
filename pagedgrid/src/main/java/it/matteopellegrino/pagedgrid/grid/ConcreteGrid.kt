@@ -44,11 +44,14 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
             override fun hasNext(): Boolean = cursor < end
 
             override fun next(): View {
+                val v = m[cursor / columns][cursor % rows]
                 cursor++
-                return m[cursor / columns][cursor % rows]
+                return v
             }
 
         }
     }
 
+    override fun forEachIndexed(action: (x: Int, y: Int, cell: View) -> Unit) =
+            forEachIndexed { index, view -> action(index / columns, index % rows, view) }
 }

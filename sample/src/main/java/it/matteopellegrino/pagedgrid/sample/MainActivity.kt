@@ -16,11 +16,11 @@ class MainActivity : AppCompatActivity() {
         val pageFactory = ConcreteGridFactory(baseContext)
         val page = pageFactory.createEmpty(4, 4)
 
-        page[1, 2] = elementFactory.createIconButton("Asssignment", R.drawable.ic_outline_assignment_24px)
+        page[1, 2] = elementFactory.createIconButton("Assignment", R.drawable.ic_outline_assignment_24px)
+        page[2, 3] = elementFactory.createIconButton("Assignment", R.drawable.ic_outline_assignment_24px)
+        page[3, 1] = elementFactory.createIconButton("Assignment", R.drawable.ic_outline_assignment_24px)
 
-        for (x in 0 until page.columns)
-            for(y in 0 until page.rows)
-                page[x, y] = elementFactory.createIconButton("Asssignment", R.drawable.ic_outline_assignment_24px)
+
 
         pagedGridView.pages = listOf(page)
     }

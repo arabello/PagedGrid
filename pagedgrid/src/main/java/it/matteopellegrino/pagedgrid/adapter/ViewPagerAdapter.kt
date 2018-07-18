@@ -4,8 +4,7 @@ import android.support.v4.view.PagerAdapter
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TableRow
+import android.widget.GridLayout
 import it.matteopellegrino.pagedgrid.grid.Grid
 
 
@@ -29,39 +28,34 @@ internal class ViewPagerAdapter(var pages: List<Grid>) : PagerAdapter() {
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val tableLayout = TableLayout(container.context)
-        val tableParams = TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT)
-
-        tableLayout.layoutParams = tableParams
-        tableLayout.isStretchAllColumns = true
-
         val grid = pages[position]
+        val gridLayout = GridLayout(container.context)
 
-        val cellMinWidth = container.measuredWidth / grid.columns
-        val cellMinHeight = container.measuredHeight / grid.rows
+        val gridLayoutParams = ViewGroup.LayoutParams(
+                GridLayout.LayoutParams.MATCH_PARENT,
+                GridLayout.LayoutParams.MATCH_PARENT
+        )
+        gridLayout.layoutParams = gridLayoutParams
 
-        for (y in 0 until grid.rows){
-            val tableRow = TableRow(container.context)
-            tableRow.layoutParams = tableParams
-            tableRow.minimumHeight = cellMinHeight
-            tableRow.gravity = Gravity.CENTER
+        val cellWidth = container.measuredWidth / grid.columns
+        val cellHeight = container.measuredHeight / grid.rows
+        val span = 1
+        val alignment = GridLayout.CENTER
 
-            for (x in 0 until grid.columns) {
-                val cell = grid[x, y]
-                cell.layoutParams = TableRow.LayoutParams(
-                        TableRow.LayoutParams.MATCH_PARENT,
-                        TableRow.LayoutParams.MATCH_PARENT
-                )
-                cell.minimumWidth = cellMinWidth
-                cell.minimumHeight = cellMinHeight
-                tableRow.addView(cell)
-            }
+        grid.forEachIndexed { x, y, cell ->
+            val cellParams = GridLayout.LayoutParams()
+            cellParams.columnSpec = GridLayout.spec(x, span, alignment)
+            cellParams.rowSpec = GridLayout.spec(y, span, alignment)
+            cellParams.setGravity(Gravity.CENTER)
+            cellParams.width = cellWidth
+            cellParams.height = cellHeight
 
-            tableLayout.addView(tableRow)
+            cell.layoutParams = cellParams
+            gridLayout.addView(cell)
         }
 
-        container.addView(tableLayout)
-        return tableLayout
+        container.addView(gridLayout)
+        return gridLayout
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
