@@ -1,28 +1,31 @@
 package it.matteopellegrino.pagedgrid.grid
 
-import android.content.Context
-import android.view.View
-import android.widget.Space
+import it.matteopellegrino.pagedgrid.element.Element
+import it.matteopellegrino.pagedgrid.element.Empty
 
-internal class ConcreteGrid(val context: Context, override var columns: Int, override var rows: Int) : Grid {
+/**
+ * TODO: Add class description
+ *
+ * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
+ */
+abstract class AbstractGrid: Grid {
+    internal abstract var m:Array<Array<Element>>
 
-    private var m:Array<Array<View>> = Array(columns) { Array(rows) { Space(context) as View } }
-
-    override fun get(columnIndex: Int, rowIndex: Int): View {
+    override fun get(columnIndex: Int, rowIndex: Int): Element {
         if (columnIndex > columns || rowIndex > rows || columnIndex < 0 || rowIndex < 0)
             throw IndexOutOfBoundsException()
 
         return m[columnIndex][rowIndex]
     }
 
-    override fun set(columnIndex: Int, rowIndex: Int, element: View) {
+    override fun set(columnIndex: Int, rowIndex: Int, element: Element) {
         if (columnIndex > columns || rowIndex > rows || columnIndex < 0 || rowIndex < 0)
             throw IndexOutOfBoundsException()
 
         m[columnIndex][rowIndex] = element
     }
 
-    override fun contains(element: View): Boolean {
+    override fun contains(element: Element): Boolean {
         forEach {
             if (it == element)
                 return true
@@ -30,23 +33,23 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
         return false
     }
     override fun clear() {
-        m = Array(columns) { Array(rows) { Space(context) as View } }
+        m = Array(columns) { Array(rows) { Empty() as Element } }
     }
 
     override fun clear(columnIndex: Int, rowIndex: Int) {
-        m[columnIndex][rowIndex] = Space(context) as View
+        m[columnIndex][rowIndex] = Empty()
     }
 
     private fun indexToCord(index: Int): Pair<Int, Int> = Pair(index % columns, index / columns)
 
-    override fun iterator(): Iterator<View> {
-        return object : Iterator<View>{
+    override fun iterator(): Iterator<Element> {
+        return object : Iterator<Element>{
             var cursor = 0
             val end = columns * rows
 
             override fun hasNext(): Boolean = cursor < end
 
-            override fun next(): View {
+            override fun next(): Element {
                 val cord = indexToCord(cursor)
                 val v = m[cord.first][cord.second]
                 cursor++
@@ -56,9 +59,9 @@ internal class ConcreteGrid(val context: Context, override var columns: Int, ove
         }
     }
 
-    override fun forEachIndexed(action: (x: Int, y: Int, cell: View) -> Unit) =
-            forEachIndexed { index, view ->
+    override fun forEachIndexed(action: (x: Int, y: Int, cell: Element) -> Unit) =
+            forEachIndexed { index, elem ->
                 val cord = indexToCord(index)
-                action(cord.first, cord.second, view)
+                action(cord.first, cord.second, elem)
             }
 }

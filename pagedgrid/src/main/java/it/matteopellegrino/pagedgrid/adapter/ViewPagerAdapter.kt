@@ -42,7 +42,7 @@ internal class ViewPagerAdapter(var pages: List<Grid>) : PagerAdapter() {
         val span = 1
         val alignment = GridLayout.CENTER
 
-        grid.forEachIndexed { x, y, cell ->
+        grid.forEachIndexed { x, y, element ->
             val cellParams = GridLayout.LayoutParams()
             cellParams.columnSpec = GridLayout.spec(x, span, alignment)
             cellParams.rowSpec = GridLayout.spec(y, span, alignment)
@@ -50,6 +50,7 @@ internal class ViewPagerAdapter(var pages: List<Grid>) : PagerAdapter() {
             cellParams.width = cellWidth
             cellParams.height = cellHeight
 
+            val cell = element.inflateView(gridLayout)
             cell.layoutParams = cellParams
             gridLayout.addView(cell)
         }
