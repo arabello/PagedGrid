@@ -9,5 +9,6 @@ import android.view.ViewGroup
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
 interface Element {
+    fun setOnInflateViewListener(listener: (View) -> Unit)
     fun inflateView(parent: ViewGroup): View
 }

@@ -20,6 +20,8 @@ class BitmapIcon(override val title: String, val bitmap: Bitmap): AbstractIcon(t
         v.findViewById<TextView>(R.id.elementIconTitle).text = title
         v.findViewById<ImageView>(R.id.elementIconImage).setImageBitmap(bitmap)
 
+        onInflate?.invoke(v)
+
         return v
     }
 }

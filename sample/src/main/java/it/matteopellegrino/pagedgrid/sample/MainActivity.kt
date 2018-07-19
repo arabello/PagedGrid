@@ -2,8 +2,8 @@ package it.matteopellegrino.pagedgrid.sample
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import it.matteopellegrino.pagedgrid.element.DrawableIcon
-import it.matteopellegrino.pagedgrid.element.Empty
 import it.matteopellegrino.pagedgrid.grid.EmptyGrid
 import it.matteopellegrino.pagedgrid.grid.Grid
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,5 +28,11 @@ class MainActivity : AppCompatActivity() {
         pages += EmptyGrid(4, 3)
 
         pagedGridView.pages = pages
+
+        pagedGridView.pages[0][1,2].setOnInflateViewListener {
+            it.setOnClickListener {
+                Toast.makeText(baseContext, "1,2", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -9,8 +9,12 @@ import android.widget.Space
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
-class Empty: Element {
+class Empty: AbstractElement() {
     override fun inflateView(parent: ViewGroup): View {
-        return Space(parent.context)
+        val v = Space(parent.context)
+
+        onInflate?.invoke(v)
+
+        return v
     }
 }

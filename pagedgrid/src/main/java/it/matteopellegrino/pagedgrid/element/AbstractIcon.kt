@@ -5,4 +5,4 @@ package it.matteopellegrino.pagedgrid.element
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
-abstract class AbstractIcon(open val title: String) : Element
+abstract class AbstractIcon(open val title: String) : AbstractElement()

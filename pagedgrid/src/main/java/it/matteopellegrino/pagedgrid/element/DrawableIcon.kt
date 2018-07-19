@@ -20,6 +20,8 @@ data class DrawableIcon(override val title: String, @DrawableRes val res: Int): 
         v.findViewById<TextView>(R.id.elementIconTitle).text = title
         v.findViewById<ImageView>(R.id.elementIconImage).setImageResource(res)
 
+        onInflate?.invoke(v)
+
         return v
     }
 }
