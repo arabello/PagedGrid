@@ -16,4 +16,6 @@ interface Matrix<E> : Iterable<E> {
     operator fun set(columnIndex: Int, rowIndex: Int, element: E)
 
     fun contains(element: E): Boolean
+
+    fun forEachIndexed(action: (x: Int, y: Int, element: E) -> Unit)
 }

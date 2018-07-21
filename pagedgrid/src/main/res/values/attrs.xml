@@ -3,5 +3,9 @@
     <declare-styleable name="PagedGridView">
         <attr name="pageIndicatorUnselected" format="color" />
         <attr name="pageIndicatorSelected" format="color" />
+        <attr name="orientation" format="enum">
+            <enum name="portrait" value="1"/>
+            <enum name="landscape" value="2"/>
+        </attr>
     </declare-styleable>
 </resources>

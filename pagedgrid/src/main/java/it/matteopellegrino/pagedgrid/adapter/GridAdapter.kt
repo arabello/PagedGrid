@@ -1,10 +1,13 @@
 package it.matteopellegrino.pagedgrid.adapter
 
+import android.content.res.Configuration
 import android.support.v4.view.PagerAdapter
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import it.matteopellegrino.pagedgrid.PagedGridView
+import it.matteopellegrino.pagedgrid.grid.EmptyGrid
 import it.matteopellegrino.pagedgrid.grid.Grid
 
 
@@ -13,7 +16,8 @@ import it.matteopellegrino.pagedgrid.grid.Grid
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
-internal class ViewPagerAdapter(var pages: List<Grid>) : PagerAdapter() {
+internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
+    var orientation: Int = PagedGridView.ORIENTATION_PORTRAIT
 
     override fun getCount(): Int {
         return pages.size
@@ -27,8 +31,26 @@ internal class ViewPagerAdapter(var pages: List<Grid>) : PagerAdapter() {
         return PagerAdapter.POSITION_NONE
     }
 
+    // Rotate clockwise
+    private fun Grid.rotate(): Grid{
+        val newColumns = this.rows
+        val newRows = this.columns
+        val new = EmptyGrid(newColumns, newRows)
+
+        this.forEachIndexed { x, y, element ->
+            val newX = newColumns - 1 - y
+            val newY = x
+            new[newX, newY] = element
+        }
+
+        return new
+    }
+
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val grid = pages[position]
+        var grid = pages[position]
+        if (orientation != PagedGridView.ORIENTATION_PORTRAIT)
+            grid = grid.rotate()
+
         val gridLayout = GridLayout(container.context)
 
         val gridLayoutParams = ViewGroup.LayoutParams(

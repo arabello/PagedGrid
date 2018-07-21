@@ -10,5 +10,4 @@ import it.matteopellegrino.pagedgrid.element.Element
 interface Grid : Matrix<Element> {
     fun clear(columnIndex: Int, rowIndex: Int)
     fun clear()
-    fun forEachIndexed(action: (x: Int, y: Int, elem: Element) -> Unit)
 }

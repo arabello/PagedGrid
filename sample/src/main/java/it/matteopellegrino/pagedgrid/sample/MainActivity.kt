@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         val page = EmptyGrid(4, 4)
 
-        page[1, 2] = DrawableIcon("Assignment", R.drawable.ic_outline_assignment_24px)
-        page[2, 3] = DrawableIcon("Assignment", R.drawable.ic_outline_assignment_24px)
-        page[3, 1] = DrawableIcon("Assignment", R.drawable.ic_outline_assignment_24px)
+        page[1, 2] = DrawableIcon("(1,2)", R.drawable.ic_outline_assignment_24px)
+        page[2, 3] = DrawableIcon("(2,3)", R.drawable.ic_outline_assignment_24px)
+        page[3, 1] = DrawableIcon("(3,1)", R.drawable.ic_outline_assignment_24px)
 
         pages += page
 
@@ -29,10 +29,15 @@ class MainActivity : AppCompatActivity() {
 
         pagedGridView.pages = pages
 
-        pagedGridView.pages[0][1,2].setOnInflateViewListener {
-            it.setOnClickListener {
-                Toast.makeText(baseContext, "1,2", Toast.LENGTH_SHORT).show()
+        pagedGridView.pages.forEach {
+            it.forEachIndexed { x, y, elem ->
+                elem.setOnInflateViewListener { view ->
+                    view.setOnClickListener {
+                        Toast.makeText(baseContext, "View on ($x, $y) clicked", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
+
     }
 }
