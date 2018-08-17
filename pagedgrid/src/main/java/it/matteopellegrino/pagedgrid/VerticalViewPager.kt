@@ -8,7 +8,9 @@ import android.view.View
 
 
 /**
- * TODO: Add class description
+ * Specialization of [ViewPager] used in landscape mode.
+ * This class allows vertical scrolling, maintaining the same
+ * movement direction from the portrait mode.
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */

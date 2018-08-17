@@ -1,6 +1,5 @@
 package it.matteopellegrino.pagedgrid.adapter
 
-import android.content.res.Configuration
 import android.support.v4.view.PagerAdapter
 import android.view.Gravity
 import android.view.View
@@ -12,7 +11,11 @@ import it.matteopellegrino.pagedgrid.grid.Grid
 
 
 /**
- * TODO: Add class description
+ * Specialization of [PagerAdapter] responsible to adapt each [Grid]
+ * (specified by the constructor argument) into a [GridLayout] view.
+ * This adapter is manly used by a [android.support.v4.view.ViewPager]
+ * to render each [GridLayout].
+ * This class also contains logic for landscape mode.
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */

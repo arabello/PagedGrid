@@ -4,7 +4,7 @@ import it.matteopellegrino.pagedgrid.element.Element
 import it.matteopellegrino.pagedgrid.element.Empty
 
 /**
- * TODO: Add class description
+ * Basic business logic every [Grid] implementation should have
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */

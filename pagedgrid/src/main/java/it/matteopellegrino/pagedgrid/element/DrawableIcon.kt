@@ -9,7 +9,7 @@ import android.widget.TextView
 import it.matteopellegrino.pagedgrid.R
 
 /**
- * TODO: Add class description
+ * Concrete representation of [AbstractIcon] using a [res] drawable id as icon.
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */

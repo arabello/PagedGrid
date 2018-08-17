@@ -1,7 +1,9 @@
 package it.matteopellegrino.pagedgrid.grid
 
 /**
- * TODO: Add class description
+ * Generic representation of a matrix and basic model utilities.
+ * The coordinates are the Android standard ones:
+ * the first coordinate is the column index, the second one is the row index.
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
@@ -17,5 +19,11 @@ interface Matrix<E> : Iterable<E> {
 
     fun contains(element: E): Boolean
 
+    /**
+     * Iterate the matrix invoking [action] for each element.
+     * [action#x] is the column index
+     * [action#y] is the row index
+     * [action#element] the element positioned at the coordinate (x,y)
+     */
     fun forEachIndexed(action: (x: Int, y: Int, element: E) -> Unit)
 }

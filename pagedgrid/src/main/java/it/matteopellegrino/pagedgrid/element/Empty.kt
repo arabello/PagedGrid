@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import android.widget.Space
 
 /**
- * TODO: Add class description
+ * Implementation of [AbstractElement] using [Space] to allow
+ * empty cell in [it.matteopellegrino.pagedgrid.grid.Grid]
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */

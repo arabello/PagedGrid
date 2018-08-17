@@ -3,7 +3,8 @@ package it.matteopellegrino.pagedgrid.grid
 import it.matteopellegrino.pagedgrid.element.Element
 
 /**
- * TODO: Add class description
+ * Simple specialization of [Matrix] which adds the feature to
+ * remove an element and remove all elements.
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
