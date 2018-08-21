@@ -23,7 +23,7 @@
         attrs:piv_selectedColor="@android:color/black"
         attrs:piv_unselectedColor="@android:color/darker_gray" />
 
-    <it.matteopellegrino.pagedgrid.VerticalViewPager
+    <io.matteopellegrino.pagedgrid.VerticalViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/viewPager"
         android:layout_width="0dp"
