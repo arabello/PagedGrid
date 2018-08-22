@@ -1,17 +1,48 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
+
+def version = "0.0.1"
+
+
+// To publish on bintray
+// $ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+publish {
+    def groupProjectID = 'io.matteopellegrino'
+    def artifactProjectID = 'pagedgrid'
+    def publishVersionID = "${version}"
+
+    userOrg = 'arabello'
+    repoName = 'android'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Custom android view that shows multiple pages, each one is a grid with editable content and layout.'
+    website = 'https://github.com/arabello/PagedGrid'
+}
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
+
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "0.0.1"
+        versionName "${version}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -29,7 +60,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
