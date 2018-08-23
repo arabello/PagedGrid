@@ -62,7 +62,7 @@ internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
         )
         gridLayout.layoutParams = gridLayoutParams
 
-        val cellWidth = container.measuredWidth / grid.columns
+        val cellWidth = container.measuredWidth/ grid.columns
         val cellHeight = container.measuredHeight / grid.rows
         val span = 1
         val alignment = GridLayout.CENTER

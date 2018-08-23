@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         // Effectively show the pages assigning them to the corresponding property of PagedGridView
         // No notify is required. The adapter will update by itself.
         pagedGridView.pages = mutableListOf(page1, page2, page3)

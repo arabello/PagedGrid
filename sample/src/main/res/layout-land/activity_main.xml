@@ -6,10 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="72dp"
+        android:layout_height="match_parent"
+        android:text="Other view to test PagedGridView measurement"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:rotation="90"
+        android:background="@android:color/holo_blue_light"/>
+
     <io.matteopellegrino.pagedgrid.PagedGridView
         android:id="@+id/pagedGridView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:orientation="landscape">
 
     </io.matteopellegrino.pagedgrid.PagedGridView>

@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:text="Other view to test PagedGridView measurement"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:background="@android:color/holo_blue_light"/>
+
     <io.matteopellegrino.pagedgrid.PagedGridView
         android:id="@+id/pagedGridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </io.matteopellegrino.pagedgrid.PagedGridView>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
 </android.support.constraint.ConstraintLayout>
