@@ -1,10 +1,12 @@
 package io.matteopellegrino.pagedgrid
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import io.matteopellegrino.pagedgrid.adapter.GridAdapter
 import io.matteopellegrino.pagedgrid.grid.Grid
@@ -36,6 +38,7 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
     }
 
     private val gridAdapter = GridAdapter(pages)
+    private var viewPager: ViewPager
 
     constructor(context: Context) : this(context, null)
 
@@ -52,7 +55,7 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
             arr.recycle()
         }
 
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+        viewPager = findViewById<ViewPager>(R.id.viewPager)
         viewPager.adapter = gridAdapter
         pageIndicator.setViewPager(viewPager)
     }

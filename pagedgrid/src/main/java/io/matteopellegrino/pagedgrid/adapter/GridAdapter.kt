@@ -1,6 +1,7 @@
 package io.matteopellegrino.pagedgrid.adapter
 
 import android.support.v4.view.PagerAdapter
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -62,10 +63,12 @@ internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
         )
         gridLayout.layoutParams = gridLayoutParams
 
-        val cellWidth = container.measuredWidth/ grid.columns
+        val cellWidth = container.measuredWidth / grid.columns
         val cellHeight = container.measuredHeight / grid.rows
         val span = 1
         val alignment = GridLayout.CENTER
+
+        Log.d("ciao", "$position ${container.measuredWidth} ${container.measuredHeight}")
 
         grid.forEachIndexed { x, y, element ->
             val cellParams = GridLayout.LayoutParams()

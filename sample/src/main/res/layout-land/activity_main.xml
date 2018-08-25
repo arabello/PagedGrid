@@ -13,7 +13,6 @@
         android:text="Other view to test PagedGridView measurement"
         android:gravity="center"
         android:textAlignment="center"
-        android:rotation="90"
         android:background="@android:color/holo_blue_light"/>
 
     <io.matteopellegrino.pagedgrid.PagedGridView
