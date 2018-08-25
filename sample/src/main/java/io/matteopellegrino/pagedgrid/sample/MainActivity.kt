@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         page1[0, 2] = DrawableIcon("Photo Filter", R.drawable.ic_photo_filter_black_24dp)
         page1[2, 2] = DrawableIcon("Portrait", R.drawable.ic_portrait_black_24dp)
-        page1[3, 2] = DrawableIcon("Home", R.drawable.ic_home)
 
         // Create a second page.
         val page2 = EmptyGrid(2, 3)
