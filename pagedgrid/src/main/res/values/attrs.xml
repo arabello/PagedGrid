@@ -7,5 +7,6 @@
             <enum name="portrait" value="1"/>
             <enum name="landscape" value="2"/>
         </attr>
+        <attr name="animationEnabled" format="boolean"/>
     </declare-styleable>
 </resources>

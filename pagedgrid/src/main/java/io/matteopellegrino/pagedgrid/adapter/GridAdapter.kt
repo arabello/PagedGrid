@@ -20,7 +20,7 @@ import io.matteopellegrino.pagedgrid.grid.Grid
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
-internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
+internal class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
     var orientation: Int = PagedGridView.ORIENTATION_PORTRAIT
 
     override fun getCount(): Int {
@@ -68,8 +68,6 @@ internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
         val span = 1
         val alignment = GridLayout.CENTER
 
-        Log.d("ciao", "$position ${container.measuredWidth} ${container.measuredHeight}")
-
         grid.forEachIndexed { x, y, element ->
             val cellParams = GridLayout.LayoutParams()
             cellParams.columnSpec = GridLayout.spec(x, span, alignment)
@@ -82,6 +80,7 @@ internal class GridAdapter(var pages: List<Grid>) : PagerAdapter() {
             cell.layoutParams = cellParams
             gridLayout.addView(cell)
         }
+
 
         container.addView(gridLayout)
         return gridLayout

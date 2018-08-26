@@ -12,6 +12,7 @@ import io.matteopellegrino.pagedgrid.element.BitmapIcon
 import io.matteopellegrino.pagedgrid.element.DrawableIcon
 import io.matteopellegrino.pagedgrid.grid.EmptyGrid
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
         // Effectively show the pages assigning them to the corresponding property of PagedGridView
         // No notify is required. The adapter will update by itself.
-        pagedGridView.pages = mutableListOf(page1, page2, page3)
+        pagedGridView.pages = arrayOf(page1, page2, page3)
 
         // If you want some iteration with the user
         // you can access to every view of each cell, but the empty ones.
@@ -82,6 +83,22 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        // Randomize on text view click to show animation
+        textView.setOnClickListener {
+            val rand = Random()
+            with (page1){
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Activity", R.drawable.ic_format_align_justify_black_24dp)
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Airplay", R.drawable.ic_format_align_center_black_24dp)
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Award", R.drawable.ic_format_align_left_black_24dp)
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Chart", R.drawable.ic_format_align_right_black_24dp)
+
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Photo Filter", R.drawable.ic_photo_filter_black_24dp)
+                this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Portrait", R.drawable.ic_portrait_black_24dp)
+            }
+
+            pagedGridView.pages = arrayOf(page1, page2, page3)
         }
 
     }

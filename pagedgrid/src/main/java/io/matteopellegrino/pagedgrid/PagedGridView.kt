@@ -1,17 +1,17 @@
 package io.matteopellegrino.pagedgrid
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Color
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import io.matteopellegrino.pagedgrid.adapter.GridAdapter
 import io.matteopellegrino.pagedgrid.grid.Grid
 import kotlinx.android.synthetic.main.pagedgridview.view.*
 import kotlin.properties.Delegates
+
 
 /**
  * Contains a [ViewPager] and a [com.rd.PageIndicatorView].
@@ -32,13 +32,25 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
         const val ORIENTATION_LANDSCAPE = 2
     }
 
-    var pages: List<Grid> by Delegates.observable(mutableListOf()){ _, _, new ->
-        gridAdapter.pages = new
-        gridAdapter.notifyDataSetChanged()
+    var pages: Array<Grid> by Delegates.observable(arrayOf()){ _, _, new ->
+        if (animationEnabled)
+            animate().alpha(0f).setDuration(200).withEndAction {
+                gridAdapter.pages = new
+                gridAdapter.notifyDataSetChanged()
+                pageIndicator.setViewPager(viewPager)
+                animate().alpha(1f).setDuration(50).start()
+            }.start()
+        else{
+            gridAdapter.pages = new
+            gridAdapter.notifyDataSetChanged()
+            pageIndicator.setViewPager(viewPager)
+        }
+
     }
 
     private val gridAdapter = GridAdapter(pages)
     private var viewPager: ViewPager
+    var animationEnabled = true
 
     constructor(context: Context) : this(context, null)
 
@@ -51,6 +63,7 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
             pageIndicator.unselectedColor = arr.getColor(R.styleable.PagedGridView_pageIndicatorUnselected, Color.GRAY)
             pageIndicator.selectedColor = arr.getColor(R.styleable.PagedGridView_pageIndicatorSelected, Color.BLACK)
             gridAdapter.orientation = arr.getInt(R.styleable.PagedGridView_orientation, ORIENTATION_PORTRAIT)
+            animationEnabled = arr.getBoolean(R.styleable.PagedGridView_animationEnabled, true)
         }finally {
             arr.recycle()
         }
