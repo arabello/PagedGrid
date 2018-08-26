@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="72dp"
         android:layout_height="match_parent"
-        android:text="Other view to test PagedGridView measurement"
+        android:text=""
         android:gravity="center"
         android:textAlignment="center"
         android:background="@android:color/holo_blue_light"/>

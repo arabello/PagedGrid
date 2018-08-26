@@ -1,12 +1,11 @@
 package io.matteopellegrino.pagedgrid.adapter
 
 import android.support.v4.view.PagerAdapter
-import android.util.Log
+import android.support.v4.view.ViewPager
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
-import io.matteopellegrino.pagedgrid.PagedGridView
 import io.matteopellegrino.pagedgrid.grid.EmptyGrid
 import io.matteopellegrino.pagedgrid.grid.Grid
 
@@ -20,8 +19,19 @@ import io.matteopellegrino.pagedgrid.grid.Grid
  *
  * @author Matteo Pellegrino matteo.pelle.pellegrino@gmail.com
  */
-internal class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
-    var orientation: Int = PagedGridView.ORIENTATION_PORTRAIT
+class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
+    companion object {
+        const val ORIENTATION_PORTRAIT = 1
+        const val ORIENTATION_LANDSCAPE = 2
+
+        private const val FADE_IN_DURATION: Long = 200
+        private const val FADE_OUT_DURATION: Long = 400
+    }
+
+    internal var orientation: Int = ORIENTATION_PORTRAIT
+    private var old: Array<Grid> = pages.clone()
+
+    var isAnimationEnabled = true
 
     override fun getCount(): Int {
         return pages.size
@@ -50,9 +60,26 @@ internal class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
         return new
     }
 
+    private fun ViewGroup.fadeAddView(v: View){
+        v.alpha = 0f
+        addView(v)
+        v.animate().alpha(1f).setDuration(FADE_IN_DURATION).start()
+    }
+
+    private fun ViewGroup.fadeRemoveView(v: View){
+        v.animate().alpha(0f).setDuration(FADE_OUT_DURATION).withEndAction {
+            removeView(v)
+        }.start()
+    }
+
+    override fun notifyDataSetChanged() {
+        super.notifyDataSetChanged()
+        old = pages.clone()
+    }
+
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var grid = pages[position]
-        if (orientation != PagedGridView.ORIENTATION_PORTRAIT)
+        if (orientation != ORIENTATION_PORTRAIT)
             grid = grid.rotate()
 
         val gridLayout = GridLayout(container.context)
@@ -78,15 +105,24 @@ internal class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
 
             val cell = element.inflateView(gridLayout)
             cell.layoutParams = cellParams
+
             gridLayout.addView(cell)
         }
 
 
-        container.addView(gridLayout)
+        if (isAnimationEnabled &&
+                old[position] != pages[position] && (container as ViewPager).currentItem == position)
+            container.fadeAddView(gridLayout)
+        else
+            container.addView(gridLayout)
         return gridLayout
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        container.removeView(obj as View)
+        if (isAnimationEnabled &&
+                old[position] != pages[position] && (container as ViewPager).currentItem == position)
+            container.fadeRemoveView(obj as View)
+        else
+            container.removeView(obj as View)
     }
 }

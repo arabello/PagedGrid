@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import io.matteopellegrino.pagedgrid.adapter.GridAdapter
 import io.matteopellegrino.pagedgrid.element.AbstractElement
 import io.matteopellegrino.pagedgrid.element.BitmapIcon
 import io.matteopellegrino.pagedgrid.element.DrawableIcon
@@ -66,13 +67,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        // Effectively show the pages assigning them to the corresponding property of PagedGridView
-        // No notify is required. The adapter will update by itself.
-        pagedGridView.pages = arrayOf(page1, page2, page3)
+
+        // Now use the adapter to show all the pages
+        val gridAdapter = GridAdapter(arrayOf(page1, page2, page3))
+        pagedGridView.adapter = gridAdapter
 
         // If you want some iteration with the user
         // you can access to every view of each cell, but the empty ones.
-        pagedGridView.pages.forEach { page ->
+        gridAdapter.pages.forEach { page ->
             page.forEachIndexed { x, y, elem ->
 
                 // This method offers by Element allows you accessing the view when inflating (created)
@@ -88,7 +90,8 @@ class MainActivity : AppCompatActivity() {
         // Randomize on text view click to show animation
         textView.setOnClickListener {
             val rand = Random()
-            with (page1){
+            val page1Updated = EmptyGrid(page1.columns, page1.rows)
+            with (page1Updated){
                 this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Activity", R.drawable.ic_format_align_justify_black_24dp)
                 this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Airplay", R.drawable.ic_format_align_center_black_24dp)
                 this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Award", R.drawable.ic_format_align_left_black_24dp)
@@ -98,7 +101,17 @@ class MainActivity : AppCompatActivity() {
                 this[rand.nextInt(columns), rand.nextInt(rows)] = DrawableIcon("Portrait", R.drawable.ic_portrait_black_24dp)
             }
 
-            pagedGridView.pages = arrayOf(page1, page2, page3)
+            // When needed, you can modify the adapter dataset and notify the changes
+            gridAdapter.pages[0] = page1Updated
+            gridAdapter.notifyDataSetChanged()
+
+            // The first page will be changed with a smooth fade in-out animation.
+            // To disable the default behaviour
+            //gridAdapter.isAnimationEnabled = false
+
+            // In order to add or remove pages, you need to reassign the entire pages array
+            // gridAdapter.pages = arrayOf(page1, page2, page3, page4)
+            // gridAdapter.notifyDataSetChanged()
         }
 
     }
