@@ -110,7 +110,7 @@ class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
         }
 
 
-        if (isAnimationEnabled &&
+        if (isAnimationEnabled && old.size > position && pages.size > position &&
                 old[position] != pages[position] && (container as ViewPager).currentItem == position)
             container.fadeAddView(gridLayout)
         else
