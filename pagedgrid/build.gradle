@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-def version = "0.0.5"
+def version = "0.0.6"
 
 
 // To publish on bintray

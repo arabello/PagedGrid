@@ -1,7 +1,9 @@
 package io.matteopellegrino.pagedgrid.sample
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Vibrator
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import io.matteopellegrino.pagedgrid.adapter.GridAdapter
 import io.matteopellegrino.pagedgrid.element.AbstractElement
 import io.matteopellegrino.pagedgrid.element.BitmapIcon
 import io.matteopellegrino.pagedgrid.element.DrawableIcon
+import io.matteopellegrino.pagedgrid.element.Empty
 import io.matteopellegrino.pagedgrid.grid.EmptyGrid
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -112,6 +115,14 @@ class MainActivity : AppCompatActivity() {
             // In order to add or remove pages, you need to reassign the entire pages array
             // gridAdapter.pages = arrayOf(page1, page2, page3, page4)
             // gridAdapter.notifyDataSetChanged()
+        }
+
+        // Long press to add a new page dynamically
+        textView.setOnLongClickListener {
+            (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(60L)
+            gridAdapter.pages += EmptyGrid(4, 4)
+            gridAdapter.notifyDataSetChanged()
+            true
         }
 
     }

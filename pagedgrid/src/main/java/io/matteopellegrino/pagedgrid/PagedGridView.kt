@@ -29,14 +29,19 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
     private lateinit var viewPager: ViewPager
 
     var adapter by Delegates.observable(GridAdapter(arrayOf())){ _, _, newValue ->
+        newValue.pageIndicator = pageIndicator
+        newValue.pageIndicator?.setViewPager(viewPager)
         viewPager.adapter = newValue
-        pageIndicator.setViewPager(viewPager)
     }
 
     constructor(context: Context) : this(context, null)
 
     init{
         LayoutInflater.from(context).inflate(R.layout.pagedgridview, this, true)
+
+        viewPager = findViewById(R.id.viewPager)
+        adapter.pageIndicator = findViewById(R.id.pageIndicator)
+        adapter.pageIndicator?.setViewPager(viewPager)
 
         val arr = context.theme.obtainStyledAttributes(attrs, R.styleable.PagedGridView, 0,0)
 
@@ -49,6 +54,6 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
             arr.recycle()
         }
 
-        viewPager = findViewById<ViewPager>(R.id.viewPager)
+        viewPager.adapter = adapter
     }
 }

@@ -6,8 +6,10 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import com.rd.PageIndicatorView
 import io.matteopellegrino.pagedgrid.grid.EmptyGrid
 import io.matteopellegrino.pagedgrid.grid.Grid
+import kotlinx.android.synthetic.main.pagedgridview.view.*
 
 
 /**
@@ -29,6 +31,7 @@ class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
     }
 
     internal var orientation: Int = ORIENTATION_PORTRAIT
+    internal var pageIndicator: PageIndicatorView ?= null
     private var old: Array<Grid> = pages.clone()
 
     var isAnimationEnabled = true
@@ -74,6 +77,7 @@ class GridAdapter(var pages: Array<Grid>) : PagerAdapter() {
 
     override fun notifyDataSetChanged() {
         super.notifyDataSetChanged()
+        pageIndicator?.count = this.count
         old = pages.clone()
     }
 
