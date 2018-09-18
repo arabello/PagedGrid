@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         gridAdapter.pages.forEach { page ->
             page.forEachIndexed { x, y, elem ->
 
-                // This method offers by Element allows you accessing the view when inflating (created)
+                // This method exposed by Element allows you accessing the view when inflating (created)
                 // in order to attach whatever android event to the view, such as a click listener
                 elem.setOnInflateViewListener { view ->
                     view.setOnClickListener {
