@@ -133,10 +133,11 @@ the top-left corner as the origin (0,0)*
 ![](readme_res/landscape.gif)
 
 ## Credits
-Third party dependencies. Thanks to
+For the third party dependencies, thanks to
 
 - [PageIndicatorView](https://github.com/romandanylyk/PageIndicatorView)
 
+For the sample app illustrations, thanks to [unDraw](https://undraw.co/illustrations)
 
 ## License
 
