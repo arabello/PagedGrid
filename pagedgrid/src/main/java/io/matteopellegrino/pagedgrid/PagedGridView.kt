@@ -27,6 +27,11 @@ import kotlin.properties.Delegates
 class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.constraint.ConstraintLayout(context, attrs) {
 
     private lateinit var viewPager: ViewPager
+    var currentPage: Int
+        set(value){
+            viewPager.currentItem = value
+        }
+        get() = viewPager.currentItem
 
     var adapter by Delegates.observable(GridAdapter(arrayOf())){ _, _, newValue ->
         newValue.pageIndicator = pageIndicator
@@ -56,4 +61,5 @@ class PagedGridView(context: Context, attrs: AttributeSet?) : android.support.co
 
         viewPager.adapter = adapter
     }
+
 }
