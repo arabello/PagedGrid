@@ -14,9 +14,6 @@ buildscript {
 
 def version = "0.0.7"
 
-
-// To publish on bintray
-// $ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 publish {
     def groupProjectID = 'io.matteopellegrino'
     def artifactProjectID = 'pagedgrid'

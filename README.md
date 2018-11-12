@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/arabello/android/pagedgrid/images/download.svg) ](https://bintray.com/arabello/android/pagedgrid/_latestVersion)
+[![](https://jitpack.io/v/arabello/PagedGrid.svg)](https://jitpack.io/#arabello/PagedGrid)
 [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16)
 
 # PagedGrid
@@ -16,13 +16,34 @@ Android views reducing the complexity, for example control panels, launchers and
 
 ## Getting started
 
-[ ![Version](https://api.bintray.com/packages/arabello/android/pagedgrid/images/download.svg) ](https://bintray.com/arabello/android/pagedgrid/_latestVersion)
-
 Add the module as dependency using the latest version number, specified above.
+
+Add the JitPack repository to your build file
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+
+[![Version](https://jitpack.io/v/arabello/PagedGrid.svg)](https://jitpack.io/#arabello/PagedGrid)
+
+Add the dependency using the latest version number, specified above.
 
 ```groovy
 dependencies {
-    implementation 'io.matteopellegrino:pagedgrid:x.x.x'
+    implementation 'com.github.arabello:PagedGrid:x.x.x'
+}
+```
+
+
+It is possible to build the latest commit on the master branch, using the tag `master-SNAPSHOT`
+```groovy
+dependencies {
+    implementation 'com.github.arabello:PagedGrid:master-SNAPSHOT'
 }
 ```
 
